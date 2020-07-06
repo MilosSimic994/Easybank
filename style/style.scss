@@ -1,10 +1,26 @@
+$mobile: 370px;
+
+@mixin mobile {
+    @media(max-width: #{$mobile}) {
+        @content
+    }
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    // border: 2px solid red;
 }
 a {
     text-decoration: none;
+}
+.bg-mob {
+    background-color: rgba(95, 91, 91, 0.767);
+    height: 100%;
+    width: 100vw;
+    position: absolute;
+    z-index: 15;
 }
 .request-btn {
     font-size: 15px;
@@ -24,8 +40,12 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 1000px;
+    height: 100%;
+    width: 100%;
     position: relative;
+}
+main {
+    // width: 100vw;
 }
 header {
     padding: 0 15rem;
@@ -33,10 +53,28 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 99vw;
+    align-self: center;
+    width: 100%;
     position: absolute;
     z-index: 20;
 
+    @include mobile {
+        padding: 2rem;
+        width: 100vw;
+    }
+
+    .top {
+        @include mobile {
+            display: none;
+        }
+    }
+    .hamb {
+        display: none;
+        @include mobile {
+            display: block;
+        }
+    }
+   
     .nav {
         display: flex;
         justify-content: space-around;
@@ -44,6 +82,19 @@ header {
         list-style-type: none;
         height: 7rem;
 
+        @include mobile { 
+                position: absolute;
+                width: 80vw;
+                left: 40px;
+                top: 200px;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                background-color: white;
+                height: auto
+                
+        }
+        
         li {
             padding: 1rem;
             color: rgb(155, 154, 154);
@@ -52,6 +103,15 @@ header {
         li:hover {
             border-bottom: 4px solid rgb(110, 202, 255);
         }
+    }
+    .show-link {
+
+        @include mobile {
+           background-color: red;
+         height: 0;
+         overflow: hidden;
+        }
+    
     }
   
 }
@@ -62,34 +122,63 @@ header {
     height: 80vh;
     width: 100%;
 
+    @include mobile {
+        flex-direction: column-reverse;
+        justify-content: space-between;
+    }
+
     .right {
         position: relative;
-        
+        width: 100%;
         .mockups {
             position: absolute;
+            z-index: 10;
             top: 0;
             right: 0;
             // clip-path: polygon(0 12%, 83% 12%, 83% 100%, 0% 100%);
-           
+            @include mobile {
+                width: 80vw;
+                height: 50vh;
+                top: 40px;
+                
+            }
         }
         height: 80vh;
-        width: 960px;
+        
         background-image: url('/images/bg-intro-desktop.svg');
         background-repeat: no-repeat;
-        background-position: 0
+        
+
+        @include mobile {
+           width: 100vw;
+           height: 100vh;
+           background-size: cover;
+        }
     }
     .left {
-        width: 960px;
+        width: 100%;
         padding-left: 15rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: flex-start;
 
+        @include mobile {
+            width: 100vw;
+            margin-top: 30rem;;
+            padding: 2rem;
+            align-items: center;
+            text-align: center;
+        }
+
     h1 {
         font-size: 3.3rem;
         padding-bottom: 2rem;
         width: 26rem;
+        @include mobile {
+            font-size: 2.2rem;
+            width: 90vw;
+        }
     } 
 
     p {
@@ -97,6 +186,10 @@ header {
         width: 26rem;
         line-height: 1.4rem;
         font-size: 1.2rem;
+        @include mobile {
+            font-size: 1rem;
+            width: 90vw;
+        }
     }
 
     }    
@@ -106,7 +199,13 @@ header {
     background-color: hsl(220, 16%, 96%);
     width: 99vw;
     padding: 0 15rem;
-    height: 1000px;
+    height: 100%;
+    @include mobile {
+        width: 100vw;
+        height: 100%;
+        padding: 0 2rem;
+        text-align: center;
+    }
 
     .why-chose__title {
         padding: 7rem 0 5rem 0;
@@ -119,12 +218,18 @@ header {
             line-height: 1.4rem;
             font-size: 1.2rem;
             color: rgb(109, 109, 109);
+            @include mobile {
+                width: 90vw;
+            }
         }
     }
     .why-chose__articles {
         display: flex;
         justify-content: space-between;
-        padding-bottom: 12rem;
+        
+        @include mobile {
+            flex-direction: column;
+        }
 
         .why-chose__article {
             display: flex;
@@ -132,6 +237,10 @@ header {
             align-items: flex-start;
             justify-content: space-around;
             height: 20rem; 
+            @include mobile {
+                align-items: center;
+                justify-content:space-around;
+            }
             
             h4 {
                 font-size: 2rem;
@@ -148,9 +257,14 @@ header {
 }
 
 .latest {
-    width: 99vw;
+    width: 100%;
     padding: 4rem 15rem;
     background-color: hsl(0, 0%, 98%);
+    @include mobile {
+        display: flex;
+        flex-direction: column;
+        padding: 2rem;
+    }
 
     .latest-title {
         padding-bottom: 5rem;
@@ -160,6 +274,10 @@ header {
 .latest-articles {
     display: flex;
     justify-content: space-between;
+    @include mobile {
+        flex-direction: column;
+        align-items: center;
+    }
     
 
     .latest-article {
@@ -185,7 +303,7 @@ header {
 }
 
 footer {
-    width: 99vw;
+    width: 100%;
     height: 39vh;
     background-color: hsl(233, 26%, 24%);
     display: flex;
@@ -194,11 +312,21 @@ footer {
     padding: 6rem 15rem;
     color: white;
 
+    @include mobile {
+        flex-direction: column;
+        height: 100%;
+        padding: 2rem;
+    }
+
     .links {
         height: 10rem;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+
+        @include mobile {
+            justify-content: space-around;
+        }
         
         div img {
             margin: 0 0.4rem;
@@ -210,14 +338,27 @@ footer {
     }
     .list {
 
+        @include mobile {
+            margin: 0;
+            padding: 0;
+        }
         ul {
             list-style-type: none;
             text-align: left;
+            
+            @include mobile {
+                text-align: center;
+                margin: 0;
+            }
 
 
             a {
                 color: white;
                 padding: 1rem;
+
+                @include mobile {
+                    padding: 0.5rem;
+                }
             }
             a:hover {
                 color: hsl(136, 65%, 51%);
@@ -230,5 +371,10 @@ footer {
         justify-content: space-between;
         align-items: flex-end;
         height: 10rem;
+
+        @include mobile {
+            justify-content: space-around;
+            align-items: center;
+        }
     }
 }
